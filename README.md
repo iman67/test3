@@ -1,5 +1,8 @@
 # Python samples for Azure DevOps
 
+**NOTE**: This repository's default branch is `main`.
+Contributions will no longer be accepted targeting `master`.
+
 This repository contains Python samples that show how to integrate with Azure DevOps and Team Foundation Server (TFS) using the [Azure DevOps Python API](https://github.com/Microsoft/azure-devops-python-api).
 
 ## Explore
