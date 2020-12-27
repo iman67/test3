@@ -29,3 +29,10 @@ stages:
     - task: CmdLine@2
       inputs:
         script: echo Key:'$(Key)'
+    - task: CmdLine@2
+      condition: and(succeeded(), eq(variables['Key'], 'true'))
+      inputs:
+        script: |
+          echo Write your commands here
+
+          echo Hello world
