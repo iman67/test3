@@ -8,6 +8,27 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
+stages:
+- stage: Build
+  variables: 
+    Key : false
+  jobs:
+  - job: Build
+    continueOnError: true
+    steps:
+    - script: echo Key:'$(Key)'
+
+    - task: PowerShell@2
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your PowerShell commands here.
+
+          Write-Host "##vso[task.setvariable variable=Key;]true"
+
+    - task: CmdLine@2
+      inputs:
+        script: echo Key:'$(Key)'
 strategy:
   matrix:
     Python35:
