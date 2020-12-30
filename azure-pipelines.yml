@@ -39,14 +39,12 @@ stages:
 
     # This doesn't work, using the conditional insertion, index syntax
       ${{ if eq(variables['AppType'], 'WebJob') }}:
-    - task: DotNetCoreCLI@2
-      displayName: 'net publish for WebJob'
+    - task: CmdLine@2
       inputs:
-        command: 'publish'
+        script: echo Key:'$(Key)'
 
     # This also doesn't work, using the conditional insertion, property dereference syntax
       ${{ if eq(variables.AppType, 'WebJob') }}:
-    - task: DotNetCoreCLI@2
-      displayName: 'net publish for WebJob'
+    - task: CmdLine@2
       inputs:
-          command: 'publish'
+        script: echo Key:'$(Key)'
