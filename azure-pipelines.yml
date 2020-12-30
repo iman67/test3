@@ -34,15 +34,12 @@ stages:
          echo "##vso[task.setvariable variable=AppType;]WebJob"
          echo "##[debug] AppType set to WebJob"
 
-# This works, using the task condition
-    - task: 
-      condition: eq(variables['AppType'], 'WebJob')
-      displayName: 'net publish for WebJob'
+
       
 
     # This doesn't work, using the conditional insertion, index syntax
       ${{ if eq(variables['AppType'], 'WebJob') }}:
-    - task: 
+    - task: DotNetCoreCLI@2
       displayName: 'net publish for WebJob'
       inputs:
         command: 'publish'
