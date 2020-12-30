@@ -14,19 +14,7 @@ stages:
   - job: Build
     continueOnError: true
     steps:
-    - script: echo 'Hi'
-
-    - task: PowerShell@2
-      inputs:
-        targetType: 'inline'
-        script: |
-          # Write your PowerShell commands here.
-
-          Write-Host "##vso[task.setvariable variable=Key;]true"
-
-    - task: CmdLine@2
-      inputs:
-        script: echo Key:'$(Key)'
+    - script: echo 'Test'
     - task: Bash@3
       inputs:
        targetType: 'inline'
@@ -35,16 +23,14 @@ stages:
          echo "##[debug] AppType set to WebJob"
     - task: CmdLine@2
       inputs:
-        script: echo Key:'$(AppType)'
-        
+        script: echo Key:'$(AppType)' 
     # This doesn't work, using the conditional insertion, index syntax
       ${{ if eq(variables['AppType'], 'WebJob') }}:
     - task: CmdLine@2
       inputs:
-        script: echo Key:'$(Key)'
-
+        script: echo Key:'$(AppType)'
     # This also doesn't work, using the conditional insertion, property dereference syntax
       ${{ if eq(variables.AppType, 'WebJob') }}:
     - task: CmdLine@2
       inputs:
-        script: echo Key:'$(Key)'
+        script: echo Key:'$(AppType)'
