@@ -38,8 +38,7 @@ stages:
     - task: DotNetCoreCLI@2
       condition: eq(variables['AppType'], 'WebJob')
       displayName: 'net publish for WebJob'
-      inputs:
-        command: 'publish'
+      
 
     # This doesn't work, using the conditional insertion, index syntax
       ${{ if eq(variables['AppType'], 'WebJob') }}:
