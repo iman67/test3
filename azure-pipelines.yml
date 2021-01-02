@@ -58,7 +58,7 @@ stages:
          script: echo ispullrequest:'$(ispullrequest)'
       - task: CmdLine@2
         displayName : test variable on second job
-        condition: and(succeeded(), eq(variables['ispullrequest'], 'true'))
+        ${{ if eq(variables.ispullrequest, 'true') }}:
         inputs:
           script: echo ispullrequest:'$(ispullrequest)'
                
