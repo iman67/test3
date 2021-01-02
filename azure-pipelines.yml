@@ -24,25 +24,20 @@ stages:
          echo "##vso[task.setvariable variable=ispullrequest;]true"
     - task: CmdLine@2
       inputs:
-        script: echo Key:'$(AppType)' 
-    # This doesn't work, using the conditional insertion, index syntax
-      ${{ if eq(variables['AppType'], 'WebJob') }}:
-    - task: CmdLine@2
-      inputs:
-        script: echo Key:'$(AppType)'
+        script: echo spullrequest:'$(ispullrequest)'
                 echo ispullrequest:'$(ispullrequest)'
-    # This also doesn't work, using the conditional insertion, property dereference syntax
-      ${{ if eq(variables.AppType, 'WebJob') }}:
-    - task: CmdLine@2
-      inputs:
-        script: echo Key:'$(AppType)'
 
-
+ 
   - job: BuildDatabase
     dependsOn: Build
     displayName: Database Build
     steps:
       - checkout: none
+
+
+      - task: CmdLine@2
+        inputs:
+         script: echo Key:'$(ispullrequest)'
       - task: CmdLine@2
         condition: and(succeeded(), eq(variables['ispullrequest'], 'true'))
         inputs:
