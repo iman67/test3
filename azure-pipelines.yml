@@ -30,6 +30,7 @@ stages:
     - task: CmdLine@2
       inputs:
         script: echo Key:'$(AppType)'
+        script: echo Keyop:'$(ispullrequest)'
     # This also doesn't work, using the conditional insertion, property dereference syntax
       ${{ if eq(variables.AppType, 'WebJob') }}:
     - task: CmdLine@2
