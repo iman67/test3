@@ -6,6 +6,10 @@
 trigger:
 - master
 
+variables:
+- name : ispullrequest
+  value : 'false'
+
 pool:
   vmImage: 'ubuntu-latest'
 stages:
@@ -24,8 +28,8 @@ stages:
          echo "##vso[task.setvariable variable=ispullrequest;]true"
     - task: CmdLine@2
       inputs:
-        script: echo spullrequest:'$(ispullrequest)'
-                echo ispullrequest:'$(ispullrequest)'
+        script: echo ispullrequest:'$(ispullrequest)'
+                
 
  
   - job: BuildDatabase
@@ -37,7 +41,7 @@ stages:
 
       - task: CmdLine@2
         inputs:
-         script: echo Key:'$(ispullrequest)'
+         script: echo ispullrequest:'$(ispullrequest)'
       - task: CmdLine@2
         condition: and(succeeded(), eq(variables['ispullrequest'], 'true'))
         inputs:
