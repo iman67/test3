@@ -19,7 +19,13 @@ stages:
     continueOnError: true
     steps:
     - script: echo 'Test'
+
+    - task: CmdLine@2
+      displayName : print first
+      inputs:
+        script: echo ispullrequest:'$(ispullrequest)'
     - task: Bash@3
+      displayName : set variable
       inputs:
        targetType: 'inline'
        script: |
@@ -27,8 +33,15 @@ stages:
          echo "##[debug] AppType set to WebJob"
          echo "##vso[task.setvariable variable=ispullrequest;]true"
     - task: CmdLine@2
+      displayName : print after set variable
       inputs:
         script: echo ispullrequest:'$(ispullrequest)'
+    - task: CmdLine@2
+      displayName : test condition on first job
+      condition: and(succeeded(), eq(variables['ispullrequest'], 'true'))
+      inputs:
+        script: echo ispullrequest:'$(ispullrequest)'
+      displayName: Pull request condition value.         
                 
 
  
@@ -40,9 +53,11 @@ stages:
 
 
       - task: CmdLine@2
+        displayName : print variable on second job
         inputs:
          script: echo ispullrequest:'$(ispullrequest)'
       - task: CmdLine@2
+        displayName : test variable on second job
         condition: and(succeeded(), eq(variables['ispullrequest'], 'true'))
         inputs:
           script: echo ispullrequest:'$(ispullrequest)'
