@@ -21,6 +21,7 @@ stages:
        script: |
          echo "##vso[task.setvariable variable=AppType;]WebJob"
          echo "##[debug] AppType set to WebJob"
+         echo "##vso[task.setvariable variable=ispullrequest;]true"
     - task: CmdLine@2
       inputs:
         script: echo Key:'$(AppType)' 
@@ -34,3 +35,14 @@ stages:
     - task: CmdLine@2
       inputs:
         script: echo Key:'$(AppType)'
+
+
+  - job: BuildDatabase
+    dependsOn: Build
+    displayName: Database Build
+    steps:
+      - checkout: none
+      - task: CmdLine@2
+        inputs:
+          script: echo ispullrequest:'$(ispullrequest)'
+        displayName: Pull request condition value.         
