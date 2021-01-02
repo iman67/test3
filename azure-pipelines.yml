@@ -61,4 +61,4 @@ stages:
         condition: and(succeeded(), eq(variables['ispullrequest'], 'true'))
         inputs:
           script: echo ispullrequest:'$(ispullrequest)'
-        displayName: Pull request condition value.         
+               
