@@ -6,9 +6,7 @@
 trigger:
 - master
 
-variables:
-- name : ispullrequest
-  value : 'false'
+
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -34,7 +32,7 @@ stages:
         
       name: APPP
     - powershell:
-        Write-Host "##vso[task.setvariable variable=ispullrequest;isOutput=true]true"
+        Write-Host "##vso[task.setvariable variable=ispullrequest;isOutput=true]${env:ISPULLREQUEST}"
          
     - task: CmdLine@2
       displayName : print after set variable
