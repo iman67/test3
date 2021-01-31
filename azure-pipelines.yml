@@ -28,8 +28,8 @@ stages:
       name: APPP
     - powershell:
         Write-Host "##vso[task.setvariable variable=ispullrequest;isOutput=true]${env:ISPULLREQUEST}"
-    - powershell: 
-          Write-Host "Using an input-macro works: $(test)" 
+        Write-Host $(test)
+ 
          
     - task: CmdLine@2
       displayName : print after set variable
