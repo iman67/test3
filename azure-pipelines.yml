@@ -28,7 +28,7 @@ stages:
       name: APPP
     - powershell:
         Write-Host "##vso[task.setvariable variable=ispullrequest;isOutput=true]${env:ISPULLREQUEST}"
-        Write-Host $(test)
+        echo  $(test)
  
          
     - task: CmdLine@2
